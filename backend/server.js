@@ -15,19 +15,29 @@ const mongoUri = process.env.ATLAS_URI;
 mongoose.connect(mongoUri,{
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    reconnectTries: 30,
+    reconnectInterval: 500, // in ms
     
+})
+.then(() => console.log('DB Connected!'))
+.catch(err => {
+console.log(Error, err.message);
 });
 
 
 const connection = mongoose.connection;
 connection.once('open', () =>{
     console.log("Connection to MongoDB successfully");
-
 });
 
 
+// Routes
+const expensesRouter = require('./routes/expenses');
+const usersRouter = require('./routes/users');
 
+app.use('/expenses', expensesRouter);
+app.use('/users', usersRouter);
 
 // start the server
 app.listen(port, () => {
