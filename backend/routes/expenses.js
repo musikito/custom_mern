@@ -4,7 +4,7 @@ let Expense = require('../models/expense.model');
 // get all expenses
 router.route('/').get((req, res) => {
     Expense.find()
-    .then(exercises => res.json(exercises))
+    .then(expenses => res.json(expenses))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 

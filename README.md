@@ -16,7 +16,9 @@ Nodemon<br>
 Mongoose<br>
 Dotenv<br>
 Concurrently<br>
-Bootstrap
+Bootstrap<br>
+React Date Picker<br>
+Axios
 
 ### Testing platforms
 [Insomnia](https://insomnia.rest/)</br>
