@@ -15,7 +15,8 @@ You will also see any lint errors in the console.
 Nodemon<br>
 Mongoose<br>
 Dotenv<br>
-Concurrently
+Concurrently<br>
+Bootstrap
 
 ### Testing platforms
 [Insomnia](https://insomnia.rest/)</br>
