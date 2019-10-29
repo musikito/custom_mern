@@ -6,6 +6,8 @@ import Navbar from "./components/navbar.component"
 import ExpensesList from "./components/expenses-list.component";
 import EditExpense from "./components/edit-expense.component";
 import CreateExpense from "./components/create-expense.component";
+import CreateCategory from "./components/create-category.component";
+import CreateCurrency from "./components/create-currency.component";
 import CreateUser from "./components/create-user.component";
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
      <Route path="/" exact component={ExpensesList} />
      <Route path="/edit/:id" component={EditExpense} />
      <Route path="/create" component={CreateExpense} />
+     <Route path="/category" component={CreateCategory} />
+     <Route path="/currency" component={CreateCurrency} />
      <Route path="/user" component={CreateUser} />
      </div>
    </Router>

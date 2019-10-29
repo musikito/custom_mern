@@ -10,14 +10,19 @@ export default class CreateExpense extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeCost = this.onChangeCost.bind(this);
+    //this.onChangeCurrency = this.onChangeCurrency.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       username: '',
       description: '',
       cost: 0,
+      currency: '',
       date: new Date(),
+      category: '',
+      categories: [],
       users: []
     }
   }
@@ -34,7 +39,9 @@ export default class CreateExpense extends Component {
     })
     .catch((error) => {
       console.log(error);
-    })
+    });
+
+    
   }
 
   onChangeUsername(e) {
@@ -68,6 +75,7 @@ export default class CreateExpense extends Component {
       username: this.state.username,
       description: this.state.description,
       cost: this.state.cost,
+      //currency: this.state.currency;
       date: this.state.date,
     };
   

@@ -35,9 +35,11 @@ connection.once('open', () =>{
 // Routes
 const expensesRouter = require('./routes/expenses');
 const usersRouter = require('./routes/users');
+const categoriesRouter = require('./routes/categories');
 
 app.use('/expenses', expensesRouter);
 app.use('/users', usersRouter);
+app.use('/categories', categoriesRouter);
 
 // start the server
 app.listen(port, () => {
