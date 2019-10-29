@@ -11,6 +11,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+
 const mongoUri = process.env.ATLAS_URI;
 mongoose.connect(mongoUri,{
     useNewUrlParser: true,
@@ -36,10 +37,12 @@ connection.once('open', () =>{
 const expensesRouter = require('./routes/expenses');
 const usersRouter = require('./routes/users');
 const categoriesRouter = require('./routes/categories');
+const currencyRouter = require('./routes/currencies');
 
 app.use('/expenses', expensesRouter);
 app.use('/users', usersRouter);
 app.use('/categories', categoriesRouter);
+app.use('/currencies',currencyRouter);
 
 // start the server
 app.listen(port, () => {

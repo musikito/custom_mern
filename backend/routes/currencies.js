@@ -1,19 +1,19 @@
 const router = require('express').Router();
-let Category= require('../models/category.model');
+let Currency= require('../models/currency.model');
 
 router.route('/').get((req, res) => {
-  Category.find()
-    .then(categories => res.json(categories))
+    Currency.find()
+    .then(currencies => res.json(currencies))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
-  const category = req.body.category;
+  const currency = req.body.currency;
 
-  const newCategory = new Category({category});
+  const newCurrency = new Currency({currency});
 
-  newCategory.save()
-    .then(() => res.json('Category added!'))
+  newCurrency.save()
+    .then(() => res.json('Currency added!'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 

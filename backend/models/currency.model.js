@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const cureencySchema = new Schema({
-  category: {
+const currencySchema = new Schema({
+  currency: {
     type: String,
     required: true,
     unique: true,
@@ -13,6 +13,6 @@ const cureencySchema = new Schema({
   timestamps: true,
 });
 mongoose.models = {};
-const Currency = mongoose.model('User', cureencySchema);
+const Currency = mongoose.model('Currency', currencySchema);
 
 module.exports = Currency;

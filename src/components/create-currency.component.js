@@ -22,7 +22,7 @@ export default class CreateCurrency extends Component {
       currency: this.state.currency,
     };
     console.log(newCurrency);
-    axios.post('http://localhost:5000/currency/add', newCurrency)
+    axios.post('http://localhost:5000/currencies/add', newCurrency)
       .then(res => console.log(res.data));
 
       
@@ -33,19 +33,19 @@ export default class CreateCurrency extends Component {
   render() {
     return (
       <div>
-         <h3>Create New Category</h3>
+         <h3>Create New Currency</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
-           <label>Category: </label>
+           <label>Currency Type: </label>
            <input  type="text"
           required
           className="form-control"
-          value={this.state.category}
-          onChange={this.onChangeCategory}
+          value={this.state.currency}
+          onChange={this.onChangeCurrency}
           />
     </div>
     <div className="form-group">
-      <input type="submit" value="Create Category" className="btn btn-primary" />
+      <input type="submit" value="Create Currency" className="btn btn-primary" />
     </div>
   </form>
       </div>
