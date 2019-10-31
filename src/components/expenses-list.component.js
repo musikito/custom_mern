@@ -5,6 +5,8 @@ import axios from 'axios';
 const Expense = props => (
   <tr>
     <td>{props.expense.username}</td>
+    <td>{props.expense.category}</td>
+    <td>{props.expense.currency}</td>
     <td>{props.expense.description}</td>
     <td>{props.expense.cost}</td>
     <td>{props.expense.date.substring(0,10)}</td>
@@ -27,7 +29,10 @@ export default class ExpensesList extends Component {
     axios.get('http://localhost:5000/expenses/')
       .then(response => {
         this.setState({ expenses: response.data })
+       // console.log(response.data)
       })
+      
+      
       .catch((error) => {
         console.log(error);
       })
@@ -56,6 +61,8 @@ export default class ExpensesList extends Component {
           <thead className="thead-light">
             <tr>
               <th>Username</th>
+              <th>Category</th>
+              <th>Currency</th>
               <th>Description</th>
               <th>Cost</th>
               <th>Date</th>

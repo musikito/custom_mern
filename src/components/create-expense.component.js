@@ -121,7 +121,7 @@ export default class CreateExpense extends Component {
       date: this.state.date,
     };
   
-    console.log(expense);
+    //console.log(expense);
     axios.post('http://localhost:5000/expenses/add', expense)
         .then(res => console.log(res.data));
        window.location = '/';

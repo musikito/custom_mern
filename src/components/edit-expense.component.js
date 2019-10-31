@@ -10,14 +10,20 @@ export default class EditExpense extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeCost = this.onChangeCost.bind(this);
+    this.onChangeCurrency = this.onChangeCurrency.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       username: '',
       description: '',
       cost: 0,
+      currencies:[],
+      currency: '',
       date: new Date(),
+      category: '',
+      categories: [],
       users: []
     }
   }
@@ -29,12 +35,15 @@ export default class EditExpense extends Component {
           username: response.data.username,
           description: response.data.description,
           cost: response.data.cost,
+          category: response.data.category,
+          currency: response.data.currency,
           date: new Date(response.data.date)
-        })   
+        }) 
+        console.log(response.data)  
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
 
     axios.get('http://localhost:5000/users/')
       .then(response => {
@@ -42,12 +51,49 @@ export default class EditExpense extends Component {
       })
       .catch((error) => {
         console.log(error);
+      });
+      axios.get('http://localhost:5000/categories/')
+      .then(response => {
+        if (response.data.length > 0) {
+          this.setState({ 
+            categories: response.data.map(category => category.category),
+            category: response.data[0].category
+          });
+        }
+        
       })
+      .catch((error) => {
+        console.log(error);
+      });
+  
+      axios.get('http://localhost:5000/currencies/')
+      .then(response => {
+        if (response.data.length > 0) {
+          this.setState({ 
+            currencies: response.data.map(currency => currency.currency),
+            currency: response.data[0].currency
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   onChangeUsername(e) {
     this.setState({
       username: e.target.value
+    });
+  }
+  onChangeCategory(e) {
+    this.setState({
+      category: e.target.value
+    });
+  }
+
+  onChangeCurrency(e) {
+    this.setState({
+      currency: e.target.value
     });
   }
 
@@ -76,6 +122,8 @@ export default class EditExpense extends Component {
       username: this.state.username,
       description: this.state.description,
       cost: this.state.cost,
+      category: this.state.category,
+      currency: this.state.currency,
       date: this.state.date,
     };
 
@@ -95,6 +143,7 @@ export default class EditExpense extends Component {
           <div className="form-group"> 
             <label>Username: </label>
             <select ref="userInput"
+                required
                 className="form-control"
                 value={this.state.username}
                 onChange={this.onChangeUsername}>
@@ -103,6 +152,40 @@ export default class EditExpense extends Component {
                     return <option 
                       key={user}
                       value={user}>{user}
+                      </option>;
+                  })
+                }
+            </select>
+          </div>
+          <div className="form-group"> 
+            <label>Categories: </label>
+            <select ref="userInput"
+                required
+                className="form-control"
+                value={this.state.category}
+                onChange={this.onChangeCategory}>
+                {
+                  this.state.categories.map(function(category) {
+                    return <option 
+                      key={category}
+                      value={category}>{category}
+                      </option>;
+                  })
+                }
+            </select>
+          </div>
+          <div className="form-group"> 
+            <label>Currency: </label>
+            <select ref="userInput"
+                required
+                className="form-control"
+                value={this.state.currency}
+                onChange={this.onChangeCurrency}>
+                {
+                  this.state.currencies.map(function(currency) {
+                    return <option 
+                      key={currency}
+                      value={currency}>{currency}
                       </option>;
                   })
                 }
@@ -129,14 +212,16 @@ export default class EditExpense extends Component {
           </div>
           <div className="form-group">
             <label>Date: </label>
-            <DatePicker
-              selected={this.state.date}
-              onChange={this.onChangeDate}
-            />
+            <div>
+              <DatePicker
+                selected={this.state.date}
+                onChange={this.onChangeDate}
+              />
+            </div>
           </div>
 
           <div className="form-group">
-            <input type="submit" value="Edit Expense Log" className="btn btn-primary" />
+            <input type="submit" value="Update Expense Log" className="btn btn-primary" />
           </div>
         </form>
       </div>
