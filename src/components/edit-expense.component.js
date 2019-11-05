@@ -39,7 +39,8 @@ export default class EditExpense extends Component {
           currency: response.data.currency,
           date: new Date(response.data.date)
         }) 
-        console.log(response.data)  
+        console.log(response.data);
+        return true;
       })
       .catch(function (error) {
         console.log(error);
@@ -78,7 +79,8 @@ export default class EditExpense extends Component {
       .catch((error) => {
         console.log(error);
       });
-  }
+      
+  }// end of componentDidMount
 
   onChangeUsername(e) {
     this.setState({
@@ -131,8 +133,8 @@ export default class EditExpense extends Component {
 
     axios.post('http://localhost:5000/expenses/update/'+this.props.match.params.id, expense)
       .then(res => console.log(res.data));
-    
-    window.location = '/';
+      return true;
+   // window.location = '/';
   }
 
   render() {
@@ -221,7 +223,7 @@ export default class EditExpense extends Component {
           </div>
 
           <div className="form-group">
-            <input type="submit" value="Update Expense Log" className="btn btn-primary" />
+            <input type="submit" value="Update Expense Log" className="btn btn-outline-success" />
           </div>
         </form>
       </div>

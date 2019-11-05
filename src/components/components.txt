@@ -1,0 +1,22 @@
+<NavDropdown name="Settings"> 
+              <Link to="/category" className="dropdown-item">Create Category</Link>
+              <Link to="/currency" className="dropdown-item">Create Currency</Link>
+              <Link to="/user" className="dropdown-item">Create User</Link>
+          </NavDropdown>
+
+                 <Dropdown>
+  <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+    Settings
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item><Link to="/category">Create Category</Link></Dropdown.Item>
+    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+
+
+className="navbar navbar-dark bg-dark navbar-expand-lg" 
+
+<a href="/#" onClick={() => { props.deleteExpense(props.expense._id) }}>delete</a>

@@ -11,7 +11,10 @@ const Expense = props => (
     <td>{props.expense.cost}</td>
     <td>{props.expense.date.substring(0,10)}</td>
     <td>
-      <Link to={"/edit/"+props.expense._id}>edit</Link> | <a href="/#" onClick={() => { props.deleteExpense(props.expense._id) }}>delete</a>
+    
+      <Link to={"/edit/"+props.expense._id}>
+      <button type="button" className="btn btn-outline-primary">Edit</button>
+     </Link> | <button type="button" className="btn btn-outline-danger" onClick={() => { props.deleteExpense(props.expense._id) }}>Delete</button>
     </td>
   </tr>
 )
@@ -57,8 +60,8 @@ export default class ExpensesList extends Component {
     return (
       <div>
         <h3>Logged Expenses</h3>
-        <table className="table">
-          <thead className="thead-light">
+        <table className="table" style={{backgroundColor: '#6fd992'}}>
+          <thead className="thead-light" > 
             <tr>
               <th>Username</th>
               <th>Category</th>
