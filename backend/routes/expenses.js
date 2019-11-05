@@ -58,6 +58,7 @@ router.route('/:id').get((req, res) => {
   
         expense.save()
           .then(() => res.json('Expense updated!'))
+          
           .catch(err => res.status(400).json('Error: ' + err));
       })
       .catch(err => res.status(400).json('Error: ' + err));

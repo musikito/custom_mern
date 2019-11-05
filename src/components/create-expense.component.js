@@ -14,6 +14,7 @@ export default class CreateExpense extends Component {
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
 
     this.state = {
       username: '',
@@ -28,6 +29,13 @@ export default class CreateExpense extends Component {
     }
   }
 
+  renderRedirect = async () => {
+    console.log("in redirect");
+      //return <Redirect to='/' />;
+       //window.location.href="/";
+       this.props.history.push('/');
+   
+  }
   componentDidMount() {
     // Get the users and show populate
     // dropdown
@@ -123,8 +131,9 @@ export default class CreateExpense extends Component {
   
     //console.log(expense);
     axios.post('http://localhost:5000/expenses/add', expense)
-        .then(res => console.log(res.data));
-       window.location = '/';
+        .then(res => console.log(res.data))
+        .then(this.renderRedirect);
+      // window.location = '/';
   }
 
   render() {

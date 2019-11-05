@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+//import { Redirect } from 'react-router-dom';
+
 import axios from 'axios';
 
 export default class EditExpense extends Component {
@@ -14,6 +16,7 @@ export default class EditExpense extends Component {
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
 
     this.state = {
       username: '',
@@ -27,7 +30,13 @@ export default class EditExpense extends Component {
       users: []
     }
   }
-
+  renderRedirect = async () => {
+    console.log("in redirect");
+      //return <Redirect to='/' />;
+       //window.location.href="/";
+       this.props.history.push('/');
+   
+  }
   componentDidMount() {
     axios.get('http://localhost:5000/expenses/'+this.props.match.params.id)
       .then(response => {
@@ -117,8 +126,9 @@ export default class EditExpense extends Component {
     });
   }
 
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(e){
+
+    
 
     const expense = {
       username: this.state.username,
@@ -129,12 +139,17 @@ export default class EditExpense extends Component {
       date: this.state.date,
     };
 
-    console.log(expense);
+     try{
+       axios.post('http://localhost:5000/expenses/update/'+this.props.match.params.id, expense)
+      .then(res => console.log(res.data))
+      //.then(window.location.href="/");
+      .then(this.renderRedirect);
+     } catch(err){
 
-    axios.post('http://localhost:5000/expenses/update/'+this.props.match.params.id, expense)
-      .then(res => console.log(res.data));
+     }
+   
+       e.preventDefault();
       return true;
-   // window.location = '/';
   }
 
   render() {
