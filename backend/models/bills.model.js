@@ -5,7 +5,8 @@ const billsSchema = new Schema({
     bill:{
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true,
     },
     date: {
         type: Date,
