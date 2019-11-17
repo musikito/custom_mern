@@ -14,11 +14,18 @@ You will also see any lint errors in the console.
 ### Dependencies
 Nodemon<br>
 Mongoose<br>
+Express<br>
 Dotenv<br>
 Concurrently<br>
 Bootstrap<br>
 React Date Picker<br>
-Axios
+Axios<br>
+Express Validator<br>
+Bcryptjs<br>
+Config<br>
+Gravatar<br>
+Jsonwebtoken<br>
+Request
 
 ### Testing platforms
 [Insomnia](https://insomnia.rest/)</br>
