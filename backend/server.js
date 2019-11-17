@@ -38,11 +38,13 @@ const expensesRouter = require('./routes/expenses');
 const usersRouter = require('./routes/users');
 const categoriesRouter = require('./routes/categories');
 const currencyRouter = require('./routes/currencies');
+const billsRoute = require('./routes/bills');
 
 app.use('/expenses', expensesRouter);
 app.use('/users', usersRouter);
 app.use('/categories', categoriesRouter);
 app.use('/currencies',currencyRouter);
+app.use('/bills', billsRoute);
 
 // start the server
 app.listen(port, () => {

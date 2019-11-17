@@ -19,9 +19,15 @@ const billsSchema = new Schema({
         type: Number, 
         required: true 
       },
-      paidBy: {
+      paidby: {
           type: Date,
           required: true
+      },
+      description: {
+          type: String
+      },
+      planned:{
+          type:Boolean
       }
 
 },{

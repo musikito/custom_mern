@@ -1,9 +1,10 @@
 const router = require('express').Router();
 let Expense = require('../models/expense.model');
-
-// get all expenses
+// @route GET models/expense
+// @desc Get all expenses
 router.route('/').get((req, res) => {
     Expense.find()
+    .sort({ date: -1 })
     .then(expenses => res.json(expenses))
     .catch(err => res.status(400).json('Error: ' + err));
 });
