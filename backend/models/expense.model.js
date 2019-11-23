@@ -25,6 +25,13 @@ const expenseSchema = new Schema({
     type: Date, 
     required: true 
   },
+  paidby: {
+    type: Date
+   // required: true
+},
+planned:{
+  type:Boolean
+},
   category: {
     type: String,
     required: true

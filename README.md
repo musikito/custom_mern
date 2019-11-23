@@ -22,6 +22,7 @@ Express<br>
 Dotenv<br>
 Concurrently<br>
 Bootstrap<br>
+Reactstrap<br>
 React Date Picker<br>
 Axios<br>
 Express Validator<br>

@@ -16,6 +16,8 @@ router.route('/add').post((req, res) => {
   const currency = req.body.currency;
   const date = Date.parse(req.body.date);
   const category = req.body.category;
+  const paidby = Date.parse(req.body.paidby);
+  const planned = req.body.planned;
 
   const newExpense = new Expense({
     username,
@@ -23,7 +25,9 @@ router.route('/add').post((req, res) => {
     cost,
     currency,
     date,
-    category
+    category,
+    paidby,
+    planned
   });
 
   // save it to the DB
@@ -56,6 +60,8 @@ router.route('/:id').get((req, res) => {
         expense.currency = req.body.currency;
         expense.date = Date.parse(req.body.date);
         expense.category = req.body.category;
+        expense.paidby = Date.parse(req.body.paidby);
+        expense.planned = req.body.planned;
   
         expense.save()
           .then(() => res.json('Expense updated!'))
