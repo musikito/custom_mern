@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+//import Checkbox from "./checkbox.component";
+
+
+
 
 export default class CreateExpense extends Component {
   constructor(props) {
@@ -12,6 +16,8 @@ export default class CreateExpense extends Component {
     this.onChangeCost = this.onChangeCost.bind(this);
     this.onChangeCurrency = this.onChangeCurrency.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangePaidBy = this.onChangePaidBy.bind(this);
+    this.onChangePlanned = this.onChangePlanned.bind(this);
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
@@ -25,9 +31,17 @@ export default class CreateExpense extends Component {
       date: new Date(),
       category: '',
       categories: [],
-      users: []
-    }
+      users: [],
+      paidby: new Date(),
+      planned: false,
+      checked: false
+    };
+    
   }
+
+
+
+  
 
   renderRedirect = async () => {
     console.log("in redirect");
@@ -117,6 +131,41 @@ export default class CreateExpense extends Component {
     });
   }
 
+  onChangePaidBy(date)
+  {
+    this.setState({
+      paidby: date
+    })
+  }
+
+  onChangePlanned(e)
+  {
+    if (e.target.checked){
+      console.log("checked")
+      this.setState({
+        planned: true
+      })
+    }else{
+      console.log("un - checked")
+      this.setState({
+        planned: false
+      })
+    }
+   
+  }
+  handleChange({target}){
+    if (target.checked){
+       console.log(!target.setAttribute('checked', true));
+       //this.planned = true;
+       
+    } else {
+       console.log(!!target.removeAttribute('checked'));
+       //this.planned = false;
+       
+    }
+  }
+  
+  
   onSubmit(e) {
     e.preventDefault();
   
@@ -127,8 +176,11 @@ export default class CreateExpense extends Component {
       category: this.state.category,
       currency: this.state.currency,
       date: this.state.date,
+      paidby: this.state.paidby,
+      planned: this.state.planned 
+
     };
-  
+  console.log(expense.planned)
     //console.log(expense);
     axios.post('http://localhost:5000/expenses/add', expense)
         .then(res => console.log(res.data))
@@ -211,6 +263,23 @@ export default class CreateExpense extends Component {
                 onChange={this.onChangeCost}
                 />
           </div>
+          <div className="form-check">
+             <input 
+             type="checkbox" 
+             className="form-check-input" 
+             id="planned" 
+             value={this.state.planned}
+             onChange={this.onChangePlanned}
+             />
+             <label className="form-check-label" for="planned">Planned</label>
+          </div>
+          <div>
+          <input type="checkbox"
+                        onClick={this.handleChange}
+                        defaultChecked={this.props.complete}
+                  />
+                  <label>check test</label>
+              </div>
           <div className="form-group">
             <label>Date: </label>
             <div>
