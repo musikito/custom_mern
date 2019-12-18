@@ -180,7 +180,7 @@ export default class CreateExpense extends Component {
       planned: this.state.planned 
 
     };
-  console.log(expense.planned)
+  //console.log(expense.planned)
     //console.log(expense);
     axios.post('http://localhost:5000/expenses/add', expense)
         .then(res => console.log(res.data))
@@ -273,13 +273,7 @@ export default class CreateExpense extends Component {
              />
              <label className="form-check-label" for="planned">Planned</label>
           </div>
-          <div>
-          <input type="checkbox"
-                        onClick={this.handleChange}
-                        defaultChecked={this.props.complete}
-                  />
-                  <label>check test</label>
-              </div>
+          
           <div className="form-group">
             <label>Date: </label>
             <div>

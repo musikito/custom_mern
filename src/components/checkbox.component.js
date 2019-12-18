@@ -1,24 +1,18 @@
-import React, { Component } from 'react';
+import React from "react";
 
-export default class Checkbox extends Component {
-    getInitialState: function() {
-      return {checked: true}
-    },
-    handleCheck: function() {
-      this.setState({checked: !this.state.checked});
-    },
-    render: function() {
-      var msg;
-      if (this.state.checked) {
-        msg = "Checked";
-      } else {
-        msg = "Un-checked";
-      }
-      return (
-        <div>
-          <input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked}/>
-          <p>Checkbox: {msg}</p>
-        </div>
-      );
-    }
-  };
+const Checkbox = ({ label, isSelected, onCheckboxChange }) => (
+  <div className="form-check">
+    <label>
+      <input
+        type="checkbox"
+        name={label}
+        checked={isSelected}
+        onChange={onCheckboxChange}
+        className="form-check-input"
+      />
+      {label}
+    </label>
+  </div>
+);
+
+export default Checkbox;

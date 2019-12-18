@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 //import { Redirect } from 'react-router-dom';
+import Checkbox from "./checkbox.component";
 
 import axios from 'axios';
 
@@ -14,6 +15,8 @@ export default class EditExpense extends Component {
     this.onChangeCost = this.onChangeCost.bind(this);
     this.onChangeCurrency = this.onChangeCurrency.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangePaidBy = this.onChangePaidBy.bind(this);
+    this.onChangePlanned = this.onChangePlanned.bind(this);
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
@@ -27,7 +30,10 @@ export default class EditExpense extends Component {
       date: new Date(),
       category: '',
       categories: [],
-      users: []
+      users: [],
+      paidby: new Date(),
+      planned: false,
+      checked: false
     }
   }
   renderRedirect = async () => {
@@ -40,15 +46,23 @@ export default class EditExpense extends Component {
   componentDidMount() {
     axios.get('http://localhost:5000/expenses/'+this.props.match.params.id)
       .then(response => {
+        //console.log(response.data)
         this.setState({
           username: response.data.username,
           description: response.data.description,
           cost: response.data.cost,
           category: response.data.category,
           currency: response.data.currency,
-          date: new Date(response.data.date)
+          date: new Date(response.data.date),
+          paidby: new Date(response.data.paidby),
+          planned: response.data.planned,
+          //checked: response.data.checked
+
         }) 
-        console.log(response.data);
+        if(response.data.planned === true){
+          console.log("checked");
+        }
+        //console.log(response.data.planned);
         return true;
       })
       .catch(function (error) {
@@ -126,9 +140,55 @@ export default class EditExpense extends Component {
     });
   }
 
-  onSubmit(e){
+  onChangePaidBy(date)
+  {
+    this.setState({
+      paidby: date
+    })
+  }
 
-    
+  onChangePlanned(e)
+  {
+    if (e.target.checked){
+      console.log("checked")
+      this.setState({
+        planned: true
+      })
+    }else{
+      console.log("un - checked")
+      this.setState({
+        planned: false
+      })
+    }
+   
+  }
+  handleChange({target}){
+    if (target.checked){
+       console.log(!target.setAttribute('checked', true));
+       //this.planned = true;
+       
+    } else {
+       console.log(!!target.removeAttribute('checked'));
+       //this.planned = false;
+       
+    }
+  }
+
+  planned(option){
+    if(option){
+      console.log("true");
+    }else
+    console.log("false")
+  }
+  createCheckbox = option => (
+    <Checkbox
+      label={option}
+      isSelected={this.state.checkboxes[option]}
+      onCheckboxChange={this.handleCheckboxChange}
+      key={option}
+    />
+  );
+  onSubmit(e){
 
     const expense = {
       username: this.state.username,
@@ -137,6 +197,8 @@ export default class EditExpense extends Component {
       category: this.state.category,
       currency: this.state.currency,
       date: this.state.date,
+      paidby: this.state.paidby,
+      planned: this.state.planned,
     };
 
      try{
@@ -157,6 +219,7 @@ export default class EditExpense extends Component {
       <div>
         <h3>Edit Expense Log</h3>
         <form onSubmit={this.onSubmit}>
+         
           <div className="form-group"> 
             <label>Username: </label>
             <select ref="userInput"
@@ -226,6 +289,16 @@ export default class EditExpense extends Component {
                 value={this.state.cost}
                 onChange={this.onChangeCost}
                 />
+          </div>
+          <div className="form-check">
+             <input 
+             type="checkbox" 
+             className="form-check-input" 
+             id="planned" 
+             value={this.state.planned}
+             onChange={this.onChangePlanned}
+             />
+             <label className="form-check-label" for="planned">Planned</label>
           </div>
           <div className="form-group">
             <label>Date: </label>
