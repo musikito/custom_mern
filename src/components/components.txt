@@ -49,3 +49,12 @@ export default class Checkbox extends Component {
 className="navbar navbar-dark bg-dark navbar-expand-lg" 
 
 <a href="/#" onClick={() => { props.deleteExpense(props.expense._id) }}>delete</a>
+
+
+
+        <div className="add_checkbox">
+
+<span>Enable Comments</span>
+<input className="checkbox" type="checkbox" name="enable_comment" onClick={this.onChangePlanned} value="enable_comment"/>
+{this.state.planned ? <div  className="comments_preview_sample">Hello</div> : null}
+</div>

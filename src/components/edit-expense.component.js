@@ -21,6 +21,8 @@ export default class EditExpense extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
 
+    this.toBeDeletedTest = this.toBeDeletedTest.bind(this);
+
     this.state = {
       username: '',
       description: '',
@@ -188,6 +190,14 @@ export default class EditExpense extends Component {
       key={option}
     />
   );
+
+  toBeDeletedTest(e)
+  {
+    this.setState({
+      checked: e.target.checked,
+    });
+  }
+
   onSubmit(e){
 
     const expense = {
@@ -219,7 +229,15 @@ export default class EditExpense extends Component {
       <div>
         <h3>Edit Expense Log</h3>
         <form onSubmit={this.onSubmit}>
-         
+        <div className="form-group">
+            <label>Date: </label>
+            <div>
+              <DatePicker
+                selected={this.state.date}
+                onChange={this.onChangeDate}
+              />
+            </div>
+          </div>
           <div className="form-group"> 
             <label>Username: </label>
             <select ref="userInput"
@@ -295,20 +313,13 @@ export default class EditExpense extends Component {
              type="checkbox" 
              className="form-check-input" 
              id="planned" 
-             value={this.state.planned}
+             checked={this.state.planned}
              onChange={this.onChangePlanned}
              />
              <label className="form-check-label" for="planned">Planned</label>
           </div>
-          <div className="form-group">
-            <label>Date: </label>
-            <div>
-              <DatePicker
-                selected={this.state.date}
-                onChange={this.onChangeDate}
-              />
-            </div>
-          </div>
+          
+         
 
           <div className="form-group">
             <input type="submit" value="Update Expense Log" className="btn btn-outline-success" />

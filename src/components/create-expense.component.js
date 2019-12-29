@@ -7,6 +7,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 
+
+
 export default class CreateExpense extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +23,8 @@ export default class CreateExpense extends Component {
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
+
+   
 
     this.state = {
       username: '',
@@ -165,7 +169,7 @@ export default class CreateExpense extends Component {
     }
   }
   
-  
+ 
   onSubmit(e) {
     e.preventDefault();
   
@@ -192,7 +196,18 @@ export default class CreateExpense extends Component {
     return (
       <div>
         <h3>Create New Expense Entry</h3>
+
         <form onSubmit={this.onSubmit}>
+        <div className="form-group">
+            <label>Date: </label>
+            <div>
+              <DatePicker
+                selected={this.state.date}
+                onChange={this.onChangeDate}
+              />
+            </div>
+
+          </div>
           <div className="form-group"> 
             <label>Username: </label>
             <select ref="userInput"
@@ -270,19 +285,14 @@ export default class CreateExpense extends Component {
              id="planned" 
              value={this.state.planned}
              onChange={this.onChangePlanned}
+             
              />
+             
              <label className="form-check-label" for="planned">Planned</label>
+             {this.state.planned ? <div  className="comments_preview_sample">Hello</div> : null}
           </div>
           
-          <div className="form-group">
-            <label>Date: </label>
-            <div>
-              <DatePicker
-                selected={this.state.date}
-                onChange={this.onChangeDate}
-              />
-            </div>
-          </div>
+         
 
           <div className="form-group">
             <input type="submit" value="Create Expense Log" className="btn btn-outline-success"  />
