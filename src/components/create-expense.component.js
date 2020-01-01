@@ -288,8 +288,19 @@ export default class CreateExpense extends Component {
              
              />
              
-             <label className="form-check-label" for="planned">Planned</label>
-             {this.state.planned ? <div  className="comments_preview_sample">Hello</div> : null}
+             <label className="form-check-label" htmlFor="planned">Planned/Scheduled</label>
+
+            {this.state.planned ? <div className="paid-by">
+            <label>Next Payment: </label>
+            <div>
+              <DatePicker
+                selected={this.state.paidby}
+                onChange={this.onChangePaidBy}
+              />
+            </div>
+
+          </div> : null}
+            
           </div>
           
          

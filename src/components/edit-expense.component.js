@@ -21,7 +21,7 @@ export default class EditExpense extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
 
-    this.toBeDeletedTest = this.toBeDeletedTest.bind(this);
+    
 
     this.state = {
       username: '',
@@ -316,7 +316,17 @@ export default class EditExpense extends Component {
              checked={this.state.planned}
              onChange={this.onChangePlanned}
              />
-             <label className="form-check-label" for="planned">Planned</label>
+             <label className="form-check-label" htmlFor="planned">Planned/Scheduled</label>
+             {this.state.planned ? <div className="paid-by">
+            <label>Next Payment: </label>
+            <div>
+              <DatePicker
+                selected={this.state.paidby}
+                onChange={this.onChangePaidBy}
+              />
+            </div>
+
+          </div> : null}
           </div>
           
          
