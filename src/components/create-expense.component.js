@@ -57,6 +57,7 @@ export default class CreateExpense extends Component {
   componentDidMount() {
     // Get the users and show populate
     // dropdown
+    /*
     axios.get('http://localhost:5000/users/')
     .then(response => {
       if (response.data.length > 0) {
@@ -69,7 +70,7 @@ export default class CreateExpense extends Component {
     .catch((error) => {
       console.log(error);
     });
-
+*/
     axios.get('http://localhost:5000/categories/')
     .then(response => {
       if (response.data.length > 0) {
@@ -174,7 +175,7 @@ export default class CreateExpense extends Component {
     e.preventDefault();
   
     const expense = {
-      username: this.state.username,
+      //username: this.state.username,
       description: this.state.description,
       cost: this.state.cost,
       category: this.state.category,
@@ -208,23 +209,7 @@ export default class CreateExpense extends Component {
             </div>
 
           </div>
-          <div className="form-group"> 
-            <label>Username: </label>
-            <select ref="userInput"
-                required
-                className="form-control"
-                value={this.state.username}
-                onChange={this.onChangeUsername}>
-                {
-                  this.state.users.map(function(user) {
-                    return <option 
-                      key={user}
-                      value={user}>{user}
-                      </option>;
-                  })
-                }
-            </select>
-          </div>
+          
           <div className="form-group"> 
             <label>Categories: </label>
             <select ref="userInput"

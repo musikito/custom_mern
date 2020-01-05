@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
+const auth = require('../../middleware/auth');
 
 require("dotenv").config();
 
@@ -114,7 +115,15 @@ router.route('/auth').post((req, res)=>{
     });// end user then
 
 }); // end of auth
+/*
+router.get("/", auth, (req, res) => {
+  User.findById(req.user.id)
+    .select("-password")
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json('Error: ' + err));
 
+}); // End get all users
+*/
 router.route('/').get((req, res) => {
   User.find()
     .then(users => res.json(users))

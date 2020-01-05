@@ -24,7 +24,7 @@ export default class EditExpense extends Component {
     
 
     this.state = {
-      username: '',
+      
       description: '',
       cost: 0,
       currencies:[],
@@ -50,7 +50,7 @@ export default class EditExpense extends Component {
       .then(response => {
         //console.log(response.data)
         this.setState({
-          username: response.data.username,
+         
           description: response.data.description,
           cost: response.data.cost,
           category: response.data.category,
@@ -71,13 +71,6 @@ export default class EditExpense extends Component {
         console.log(error);
       });
 
-    axios.get('http://localhost:5000/users/')
-      .then(response => {
-        this.setState({ users: response.data.map(user => user.username) });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
       axios.get('http://localhost:5000/categories/')
       .then(response => {
         if (response.data.length > 0) {
@@ -191,17 +184,12 @@ export default class EditExpense extends Component {
     />
   );
 
-  toBeDeletedTest(e)
-  {
-    this.setState({
-      checked: e.target.checked,
-    });
-  }
+  
 
   onSubmit(e){
 
     const expense = {
-      username: this.state.username,
+      
       description: this.state.description,
       cost: this.state.cost,
       category: this.state.category,
@@ -238,23 +226,7 @@ export default class EditExpense extends Component {
               />
             </div>
           </div>
-          <div className="form-group"> 
-            <label>Username: </label>
-            <select ref="userInput"
-                required
-                className="form-control"
-                value={this.state.username}
-                onChange={this.onChangeUsername}>
-                {
-                  this.state.users.map(function(user) {
-                    return <option 
-                      key={user}
-                      value={user}>{user}
-                      </option>;
-                  })
-                }
-            </select>
-          </div>
+         
           <div className="form-group"> 
             <label>Categories: </label>
             <select ref="userInput"

@@ -1,16 +1,21 @@
-const router = require('express').Router();
-let Expense = require('../models/expense.model');
+const express = require("express");
+const router = express.Router();
+const Expense = require('../models/expense.model');
+const auth = require("../../middleware/auth");
+
+
 // @route GET models/expense
 // @desc Get all expenses
-router.route('/').get((req, res) => {
-    Expense.find()
+router.get("/",(req, res) => {
+  Expense.find()
     .sort({ date: -1 })
     .then(expenses => res.json(expenses))
     .catch(err => res.status(400).json('Error: ' + err));
+
 });
 
-router.route('/add').post((req, res) => {
-  const username = req.body.username;
+router.post("/add", (req, res) => {
+  //const username = req.body.username;
   const description = req.body.description;
   const cost = Number(req.body.cost);
   const currency = req.body.currency;
@@ -20,7 +25,7 @@ router.route('/add').post((req, res) => {
   const planned = req.body.planned;
 
   const newExpense = new Expense({
-    username,
+    //username,
     description,
     cost,
     currency,
@@ -54,7 +59,7 @@ router.route('/:id').get((req, res) => {
   router.route('/update/:id').post((req, res) => {
     Expense.findById(req.params.id)
       .then(expense => {
-        expense.username = req.body.username;
+        //expense.username = req.body.username;
         expense.description = req.body.description;
         expense.cost = Number(req.body.cost);
         expense.currency = req.body.currency;
