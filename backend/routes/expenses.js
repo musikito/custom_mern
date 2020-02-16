@@ -6,7 +6,7 @@ const auth = require("../../middleware/auth");
 
 // @route GET models/expense
 // @desc Get all expenses
-router.get("/",(req, res) => {
+router.get("/",auth,(req, res) => {
   Expense.find()
     .sort({ date: -1 })
     .then(expenses => res.json(expenses))
@@ -14,7 +14,7 @@ router.get("/",(req, res) => {
 
 });
 
-router.post("/add", (req, res) => {
+router.post("/add", auth,(req, res) => {
   //const username = req.body.username;
   const description = req.body.description;
   const cost = Number(req.body.cost);
