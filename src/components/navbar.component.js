@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { NavDropdown } from 'react-bootstrap'
+import React, { Component } from "react";
+import { NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 /*
 class NavDropdown extends React.Component {
@@ -35,32 +35,52 @@ class NavDropdown extends React.Component {
 */
 
 export default class Navbar extends Component {
-
   render() {
     return (
-      <nav className="navbar navbar-light" style={{backgroundColor: '#6fd992'}}>
-        <Link to="/" className="navbar-brand">Expenses Tracker</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <nav
+        className="navbar navbar-light"
+        style={{ backgroundColor: "#6fd992" }}
+      >
+        <Link to="/" className="navbar-brand">
+          Expenses Tracker
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collpase navbar-collapse">
-        <ul className="navbar-nav mr-auto">
-          <li className="navbar-item">
-          <Link to="/" className="nav-link">Expenses</Link>
-          </li>
-          <li className="navbar-item">
-          <Link to="/create" className="nav-link">Create Expense Log</Link>
-          </li>
-   
-          <NavDropdown  title="Settings" id="basic-nav-dropdown">
-              <Link to="/category" className="dropdown-item">Create Category</Link>
-              <Link to="/currency" className="dropdown-item">Create Currency</Link>
-              <Link to="/user" className="dropdown-item">Create User</Link>
-            
-          </NavDropdown>
-          
-        </ul>
+        <div className="navbar-collapse">
+          <ul className="navbar-nav mr-auto">
+            <li className="navbar-item">
+              <Link to="/" className="nav-link">
+                Expenses
+              </Link>
+            </li>
+            <li className="navbar-item">
+              <Link to="/create" className="nav-link">
+                Create Expense Log
+              </Link>
+            </li>
+
+            <NavDropdown title="Settings" id="basic-nav-dropdown">
+              <Link to="/category" className="dropdown-item">
+                Create Category
+              </Link>
+              <Link to="/currency" className="dropdown-item">
+                Create Currency
+              </Link>
+              <Link to="/user" className="dropdown-item">
+                Create User
+              </Link>
+            </NavDropdown>
+          </ul>
         </div>
       </nav>
     );
